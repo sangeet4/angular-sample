@@ -1,0 +1,33 @@
+import { Injectable } from '@angular/core';
+import { root } from 'rxjs/internal/util/root';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CartService {
+
+  items = [];
+
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  addToCart(product){
+    this.items.push(product);
+  }
+
+  getCart(){
+    return this.items;
+  }
+
+  clearCart(){
+    this.items = [];
+    return this.items;
+  }
+
+  getShippingPrices(){
+    return this.http.get('/assets/shipping.json');
+  }
+
+}
